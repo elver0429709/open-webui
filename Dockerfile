@@ -169,18 +169,19 @@ COPY --chown=$UID:$GID --from=build /app/package.json /app/package.json
 # copy backend files
 COPY --chown=$UID:$GID ./backend /app/backend
 
+# Exponer puerto para Render
 EXPOSE 8080
-
-HEALTHCHECK CMD curl --silent --fail http://localhost:${PORT:-8080}/health | jq -ne 'input.status == true' || exit 1
 
 USER $UID:$GID
 ARG BUILD_HASH
 ENV WEBUI_BUILD_VERSION=${BUILD_HASH}
 ENV DOCKER=true
+ENV PORT=8080
 
-# Copia el script de inicio al contenedor y le da permisos
+# Copiar script de inicio del backend
 COPY backend/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
-# ✅ cambio clave:
-CMD ["bash", "start.sh"]
+# Comando de inicio principal
+CMD ["bash", "/app/start.sh"]
+
