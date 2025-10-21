@@ -179,4 +179,4 @@ ENV WEBUI_BUILD_VERSION=${BUILD_HASH}
 ENV DOCKER=true
 
 # ✅ cambio clave:
-CMD ["bash", "backend/start.sh"]
+CMD ["bash", "start.sh"]
