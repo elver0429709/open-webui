@@ -80,8 +80,16 @@ else
 fi
 
 # Run uvicorn
-WEBUI_SECRET_KEY="$WEBUI_SECRET_KEY" exec "$PYTHON_CMD" -m uvicorn open_webui.main:app \
-    --host "$HOST" \
-    --port "$PORT" \
+echo "🚀 Starting backend on 0.0.0.0:${PORT:-8080}..."
+
+# Asegura el valor del puerto
+PORT=${PORT:-8080}
+HOST=0.0.0.0
+
+# Ejecuta el servidor principal
+python3 -m uvicorn open_webui.main:app \
+    --host $HOST \
+    --port $PORT \
     --forwarded-allow-ips '*' \
-    "${ARGS[@]}"
+    --timeout-keep-alive 75 \
+    --proxy-headers
