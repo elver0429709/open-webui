@@ -1,5 +1,8 @@
-echo "📂 Dir list /app: $(ls -R /app)"
 #!/usr/bin/env bash
+set -e
+
+echo "📦 Installing dependencies..."
+pip install -r requirements.txt
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SCRIPT_DIR" || exit
