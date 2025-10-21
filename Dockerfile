@@ -177,11 +177,12 @@ ARG BUILD_HASH
 ENV WEBUI_BUILD_VERSION=${BUILD_HASH}
 ENV DOCKER=true
 
-# Copiar script de inicio del backend
-COPY backend/start.sh /app/start.sh
+COPY backend/start.sh ./app/start.sh
 RUN chmod +x /app/start.sh
 
-# Comando de inicio principal
-CMD ["bash", "-c", "cd backend && uvicorn open_webui.main:app --host 0.0.0.0 --port $PORT"]
+# Establecer el directorio de trabajo del backend
+WORKDIR /app/backend
 
+# Comando principal para iniciar el servidor
+CMD ["uvicorn", "open_webui.main:app", "--host", "0.0.0.0", "--port", "$PORT"]
 
