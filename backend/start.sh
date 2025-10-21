@@ -87,9 +87,11 @@ PORT=${PORT:-8080}
 HOST=0.0.0.0
 
 # Ejecuta el servidor principal
-python3 -m uvicorn backend.open_webui.main:app \
+PYTHONPATH=/app/backend python3 -m uvicorn open_webui.main:app \
     --host $HOST \
     --port $PORT \
     --forwarded-allow-ips '*' \
     --timeout-keep-alive 75 \
     --proxy-headers
+
+
