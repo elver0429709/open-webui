@@ -183,5 +183,6 @@ COPY backend/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
 # Comando de inicio principal
-CMD ["bash", "/app/start.sh"]
+CMD ["bash", "-c", "cd backend && uvicorn open_webui.main:app --host 0.0.0.0 --port $PORT"]
+
 
