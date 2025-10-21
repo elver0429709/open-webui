@@ -86,12 +86,14 @@ echo "🚀 Starting backend on 0.0.0.0:${PORT:-8080}..."
 PORT=${PORT:-8080}
 HOST=0.0.0.0
 
+# Agrega backend al PYTHONPATH para que Python encuentre open_webui
+export PYTHONPATH=/app/backend
+
 # Ejecuta el servidor principal
-PYTHONPATH=/app/backend python3 -m uvicorn open_webui.main:app \
+echo "🚀 Starting backend on 0.0.0.0:${PORT}..."
+python3 -m uvicorn open_webui.main:app \
     --host $HOST \
     --port $PORT \
     --forwarded-allow-ips '*' \
     --timeout-keep-alive 75 \
     --proxy-headers
-
-
