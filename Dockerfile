@@ -178,5 +178,9 @@ ARG BUILD_HASH
 ENV WEBUI_BUILD_VERSION=${BUILD_HASH}
 ENV DOCKER=true
 
+# Copia el script de inicio al contenedor y le da permisos
+COPY backend/start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
 # ✅ cambio clave:
 CMD ["bash", "start.sh"]
