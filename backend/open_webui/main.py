@@ -2124,3 +2124,10 @@ else:
     log.warning(
         f"Frontend build directory not found at '{FRONTEND_BUILD_DIR}'. Serving API only."
     )
+    
+import os
+from open_webui.main import app  # Este es tu objeto FastAPI principal
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))  # Render define automáticamente PORT
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=port)
